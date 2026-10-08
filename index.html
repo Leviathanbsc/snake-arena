@@ -4513,7 +4513,15 @@ function openLeaderboardModal(){
     }
     var id = cls.id;
     if (id === "python"){
-      if (n === 1) s.x2XpT = 10;
+      if (n === 1){
+        s.x2XpT = 10;
+        if (s.isPlayer){
+          beep(180, 0.35, 0.35);
+          setTimeout(function(){ beep(260, 0.1, 0.3); }, 350);
+          setTimeout(function(){ beep(340, 0.1, 0.3); }, 460);
+          setTimeout(function(){ beep(420, 0.25, 0.35); }, 570);
+        }
+      }
       else if (n === 2) s.magnetT = 15;
     }
     else if (id === "prism"){ if (n === 1) spawnClone(s); else if (n === 2) s.ghost = 5; }
@@ -5328,6 +5336,42 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
     ctx.textAlign = "center";
     ctx.fillStyle = s.isPlayer ? "#7ff0e0" : "rgba(234,244,244,0.78)";
     ctx.fillText(s.name, hx, hy - bodyR*1.3 - 8/scale);
+
+    // === x2 ОПЫТ — круглая вращающаяся стрелка рядом с ником ===
+    if (s.x2XpT > 0){
+      var _nameW = ctx.measureText(s.name).width;
+      var iconX = hx + _nameW / 2 + bodyR * 2.2;
+      var iconY = hy - bodyR*1.3 - 8/scale;
+      var iconR = bodyR * 1.15;
+      var rot = (performance.now() / 320) % (Math.PI * 2);
+      ctx.save();
+      ctx.translate(iconX, iconY);
+      ctx.rotate(rot);
+      ctx.strokeStyle = "#fce860";
+      ctx.lineWidth = Math.max(2, bodyR * 0.32);
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.arc(0, 0, iconR, 0, Math.PI * 1.55);
+      ctx.stroke();
+      var _ax = Math.cos(Math.PI * 1.55) * iconR;
+      var _ay = Math.sin(Math.PI * 1.55) * iconR;
+      var _tan = Math.PI * 1.55 + Math.PI / 2;
+      var _headSize = iconR * 0.75;
+      ctx.fillStyle = "#fce860";
+      ctx.beginPath();
+      ctx.moveTo(_ax + Math.cos(_tan) * _headSize, _ay + Math.sin(_tan) * _headSize);
+      ctx.lineTo(_ax + Math.cos(_tan - 2.2) * _headSize, _ay + Math.sin(_tan - 2.2) * _headSize);
+      ctx.lineTo(_ax + Math.cos(_tan + 2.2) * _headSize, _ay + Math.sin(_tan + 2.2) * _headSize);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      ctx.fillStyle = "#fce860";
+      ctx.font = "bold " + Math.max(10, bodyR * 1.35) + "px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("x2", iconX, iconY);
+      ctx.textBaseline = "alphabetic";
+    }
     if (alpha < 1) ctx.globalAlpha = 1;
     if (s.spawnT > 0){
       var sp2 = s.spawnT / 0.6;
