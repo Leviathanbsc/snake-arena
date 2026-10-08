@@ -4522,7 +4522,13 @@ function openLeaderboardModal(){
           setTimeout(function(){ beep(420, 0.25, 0.35); }, 570);
         }
       }
-      else if (n === 2) s.magnetT = 15;
+      else if (n === 2){
+        s.magnetT = 15;
+        if (s.isPlayer){
+          beep(1600, 0.06, 0.55);
+          setTimeout(function(){ beep(2200, 0.16, 0.35); }, 30);
+        }
+      }
     }
     else if (id === "prism"){ if (n === 1) spawnClone(s); else if (n === 2) s.ghost = 5; }
     else if (id === "aggro"){
@@ -4699,6 +4705,19 @@ function openLeaderboardModal(){
   
   function drawFruit(f){
     var x = f.x, y = f.y;
+    if (f.pulling){
+      var _ftt = performance.now() / 350;
+      var _fp = (Math.sin(_ftt) + 1) / 2;
+      var _fr = 16 - _fp * 8;
+      ctx.save();
+      ctx.globalAlpha = 0.55 * (1 - _fp * 0.6);
+      ctx.strokeStyle = "#d83434";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, _fr, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.restore();
+    }
     var pullProgress = f.pulling ? (1 - f.pullT / 0.22) : 0;
     var scaleT = f.pulling ? (1 - pullProgress * 0.4) : 1;
     var grow = f.pulling ? (1 + pullProgress * 0.5) : 1;
@@ -5372,6 +5391,58 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
       ctx.fillText("x2", iconX, iconY);
       ctx.textBaseline = "alphabetic";
     }
+
+    if (s.magnetT > 0){
+      var mgR = 320;
+      var _mgt = performance.now() / 1000;
+      ctx.save();
+      for (var wv = 0; wv < 3; wv++){
+        var _phase = ((_mgt * 0.7) + wv / 3) % 1;
+        var _wr = mgR * (0.3 + _phase * 0.7);
+        var _wa = (1 - _phase) * 0.32;
+        ctx.strokeStyle = "rgba(216,52,52," + _wa + ")";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, _wr, 0, Math.PI*2);
+        ctx.stroke();
+      }
+      ctx.strokeStyle = "rgba(216,52,52,0.35)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([10, 8]);
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, mgR, 0, Math.PI*2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      var mgSize = bodyR * 1.35;
+      var mgX = hx;
+      var mgY = hy - bodyR*1.3 - 8/scale - bodyR*2.6;
+      mgY += Math.sin(performance.now() / 300) * bodyR * 0.15;
+      var outerR = mgSize;
+      var innerR = mgSize * 0.55;
+      var tipH = mgSize * 0.55;
+      var tipW = outerR - innerR;
+      ctx.save();
+      ctx.translate(mgX, mgY);
+      ctx.beginPath();
+      ctx.arc(0, 0, outerR, Math.PI, Math.PI*2, false);
+      ctx.arc(0, 0, innerR, Math.PI*2, Math.PI, true);
+      ctx.closePath();
+      ctx.fillStyle = "#d83434";
+      ctx.fill();
+      ctx.strokeStyle = "#7a0c0c";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.fillStyle = "#c8ccd4";
+      ctx.fillRect(-outerR, 0, tipW, tipH);
+      ctx.fillRect(innerR, 0, tipW, tipH);
+      ctx.strokeStyle = "#5a6068";
+      ctx.strokeRect(-outerR, 0, tipW, tipH);
+      ctx.strokeRect(innerR, 0, tipW, tipH);
+      ctx.restore();
+    }
+
     if (alpha < 1) ctx.globalAlpha = 1;
     if (s.spawnT > 0){
       var sp2 = s.spawnT / 0.6;
