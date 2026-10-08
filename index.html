@@ -3214,12 +3214,12 @@ if (s.samColorT > 0){
         if (bdx*bdx + bdy*bdy > 1000*1000) continue;
 
         var lim = s.r + ao.r*1.5; lim *= lim;
-        var touched = false;
+        var cutIdx = -1;
         for (var j=0;j<ao.segs.length;j++){
           var q = ao.segs[j], dx = s.x-q.x, dy = s.y-q.y;
-          if (dx*dx+dy*dy < lim){ touched = true; break; }
+          if (dx*dx+dy*dy < lim){ cutIdx = j; break; }
         }
-        if (!touched) continue;
+        if (cutIdx < 0) continue;
 
         if (ao.classId === "tank" && ao.stoneSkinReady){
           if (ao.segs.length > 3) ao.segs.pop();
@@ -3232,15 +3232,14 @@ if (s.samColorT > 0){
           return false;
         }
 
-        var hdx = ao.segs[0].x - s.x, hdy = ao.segs[0].y - s.y;
-        var headLimit = (s.r + ao.r*1.5); headLimit *= headLimit;
-        if (hdx*hdx + hdy*hdy < headLimit){
+        // Попадание в голову = смерть сразу
+        if (cutIdx === 0){
           kill(ao);
           s.slicingActive = 0; s.flornInvuln = 0;
           continue;
         }
 
-        var cutIdx = Math.floor(ao.segs.length * (0.4 + Math.random()*0.3));
+        // Режем ровно в точке попадания
         if (cutIdx < 2) cutIdx = 2;
         for (var ci = cutIdx; ci < ao.segs.length; ci++){
           if (food.length > FOOD_MIN + 1200) break;
@@ -3421,6 +3420,26 @@ if (s.ab){
       if (s.colorInvert > 0) s.colorInvert -= dt;
       if (s.flornInvuln > 0) s.flornInvuln -= dt;
       if (s.slicingActive > 0) s.slicingActive -= dt;
+      if (s.ab && s.ab.growT > 0){
+        s.ab.growT -= dt;
+        s.ab.growAcc = (s.ab.growAcc || 0) + dt;
+        if (s.ab.growAcc > 0.05){
+          s.ab.growAcc = 0;
+          var _scIdx = Math.floor(Math.random() * s.segs.length);
+          var _sc = s.segs[_scIdx];
+          particles.push({
+            x: _sc.x + rand(-s.r*0.5, s.r*0.5),
+            y: _sc.y + rand(-s.r*0.5, s.r*0.5),
+            vx: rand(-50, 50),
+            vy: rand(40, 100),
+            life: 1.0,
+            maxLife: 1.0,
+            color: "rgba(220,60,60,0.9)",
+            size: rand(3, 6)
+          });
+        }
+        if (s.isPlayer && Math.random() < 0.4) beep(300 + Math.random()*300, 0.025, 0.06);
+      }
       if (s.auraBoostT > 0){ s.auraBoostT -= dt; if (s.auraBoostT <= 0) s.auraBoost = 0; }
       if (s.frozen > 0){ s.frozen -= dt; s.freezeImmune = Math.max(s.freezeImmune, s.frozen); }
       if (s.freezeImmune > 0) s.freezeImmune -= dt;
@@ -4551,6 +4570,11 @@ function openLeaderboardModal(){
         s.ab.dashDY = Math.sin(s.angle);
         s.slicingActive = 2;
         s.flornInvuln = 2;
+        if (s.isPlayer){
+          beep(220, 0.08, 0.4);
+          setTimeout(function(){ beep(360, 0.1, 0.45); }, 80);
+          setTimeout(function(){ beep(520, 0.12, 0.4); }, 180);
+        }
       } else if (n === 2){
         // Рост +50%, но общая длина не выше 300 сегментов
         var currentLen = s.segs.length + (s.flornBonus || 0);
@@ -4559,6 +4583,15 @@ function openLeaderboardModal(){
         var allowed = Math.min(bonus, 300 - currentLen);
         if (allowed < 3) allowed = 3;
         s.flornBonus = (s.flornBonus || 0) + allowed;
+        s.ab.growT = 1.5;
+        s.ab.growAcc = 0;
+        if (s.isPlayer){
+          beep(180, 0.15, 0.35);
+          setTimeout(function(){ beep(240, 0.12, 0.35); }, 100);
+          setTimeout(function(){ beep(320, 0.15, 0.4); }, 220);
+          setTimeout(function(){ beep(420, 0.15, 0.4); }, 380);
+          setTimeout(function(){ beep(520, 0.2, 0.35); }, 550);
+        }
       }
     }
     else if (id === "tank"){
@@ -5246,22 +5279,84 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
     a += headLean;
 
     if (s.classId === "aggro" && s.slicingActive > 0){
-      var spikeLen = bodyR * 1.5;
+      // Анимация: 0.3с растёт → держится → 0.3с сжимается
+      var spikePct = 1;
+      if (s.slicingActive > 1.7) spikePct = (2 - s.slicingActive) / 0.3;
+      else if (s.slicingActive < 0.3) spikePct = s.slicingActive / 0.3;
+      if (spikePct < 0) spikePct = 0;
+      if (spikePct > 1) spikePct = 1;
+      var spikeLen = bodyR * 1.5 * spikePct;
       var tipX = hx + Math.cos(a) * (bodyR * 1.15 + spikeLen);
       var tipY = hy + Math.sin(a) * (bodyR * 1.15 + spikeLen);
       var baseX1 = hx + Math.cos(a + Math.PI/2) * bodyR * 0.7;
       var baseY1 = hy + Math.sin(a + Math.PI/2) * bodyR * 0.7;
       var baseX2 = hx + Math.cos(a - Math.PI/2) * bodyR * 0.7;
       var baseY2 = hy + Math.sin(a - Math.PI/2) * bodyR * 0.7;
-      ctx.fillStyle = "#ff1a2a";
+      // Тёмный внешний слой
+      ctx.fillStyle = "#8a0010";
       ctx.beginPath(); ctx.moveTo(baseX1, baseY1); ctx.lineTo(tipX, tipY); ctx.lineTo(baseX2, baseY2);
       ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = "#8a0010"; ctx.lineWidth = 2; ctx.stroke();
+      // Яркий внутренний
+      var _itX = hx + Math.cos(a) * (bodyR * 1.15 + spikeLen * 0.75);
+      var _itY = hy + Math.sin(a) * (bodyR * 1.15 + spikeLen * 0.75);
+      ctx.fillStyle = "#ff1a2a";
+      ctx.beginPath();
+      ctx.moveTo(hx + (baseX1-hx)*0.85, hy + (baseY1-hy)*0.85);
+      ctx.lineTo(_itX, _itY);
+      ctx.lineTo(hx + (baseX2-hx)*0.85, hy + (baseY2-hy)*0.85);
+      ctx.closePath(); ctx.fill();
+      // Свечение
       ctx.save();
-      ctx.shadowColor = "#ff4a5a"; ctx.shadowBlur = 14;
-      ctx.strokeStyle = "rgba(255,80,90,0.7)"; ctx.lineWidth = 1.5;
+      ctx.shadowColor = "#ff4a5a"; ctx.shadowBlur = 18;
+      ctx.strokeStyle = "rgba(255,80,90,0.8)"; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.moveTo(baseX1, baseY1); ctx.lineTo(tipX, tipY); ctx.lineTo(baseX2, baseY2); ctx.stroke();
       ctx.restore();
+
+      // Огонь только вокруг головы (жёлто-оранжевые искры)
+      for (var _fi = 0; _fi < 5; _fi++){
+        var _fa = a + (Math.random() - 0.5) * 1.4;
+        var _fd = bodyR * (0.5 + Math.random() * 0.7);
+        var _fx = hx + Math.cos(_fa) * _fd;
+        var _fy = hy + Math.sin(_fa) * _fd;
+        var _gg = 140 + Math.floor(Math.random() * 100);
+        ctx.fillStyle = "rgba(255," + _gg + ",40," + (0.5 + Math.random()*0.4) + ")";
+        ctx.beginPath();
+        ctx.arc(_fx, _fy, bodyR * (0.12 + Math.random()*0.18), 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // Жёлтый щит неуязвимости первые 0.5 сек
+      if (s.slicingActive > 1.5){
+        var _shieldA = (s.slicingActive - 1.5) / 0.5;
+        ctx.save();
+        ctx.globalAlpha = 0.4 + _shieldA * 0.6;
+        // Внешний жёлтый круг
+        ctx.strokeStyle = "#fce860";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(hx, hy, bodyR * 1.9, 0, Math.PI*2);
+        ctx.stroke();
+        // Внутреннее свечение
+        ctx.strokeStyle = "rgba(252,232,96,0.5)";
+        ctx.lineWidth = 6;
+        ctx.beginPath();
+        ctx.arc(hx, hy, bodyR * 1.75, 0, Math.PI*2);
+        ctx.stroke();
+        // Щитик-иконка над головой (простой контур)
+        ctx.fillStyle = "#fce860";
+        ctx.beginPath();
+        var _shx = hx, _shy = hy - bodyR*2.8;
+        var _shr = bodyR * 0.7;
+        ctx.moveTo(_shx, _shy - _shr);
+        ctx.lineTo(_shx + _shr*0.9, _shy - _shr*0.4);
+        ctx.lineTo(_shx + _shr*0.9, _shy + _shr*0.3);
+        ctx.quadraticCurveTo(_shx + _shr*0.9, _shy + _shr, _shx, _shy + _shr*1.1);
+        ctx.quadraticCurveTo(_shx - _shr*0.9, _shy + _shr, _shx - _shr*0.9, _shy + _shr*0.3);
+        ctx.lineTo(_shx - _shr*0.9, _shy - _shr*0.4);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
     }
 
     ctx.fillStyle = "hsl(" + h + ",75%," + (52 + boostLight) + "%)";
