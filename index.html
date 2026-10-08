@@ -3074,7 +3074,13 @@ if (s.classId === "chameleon"){
 }
 if (s.isPlayer && run.stats) run.stats.massCollected += f.v * 0.25 * mult;
       if (QUALITY[quality].particles) spawnParticles(f.x, f.y, "rgba(242,177,52,0.7)", 2);
-      if (s.isPlayer){ if (f.v > 5) spawnParticles(f.x, f.y, "#f2b134", 3); beep(440 + Math.min(f.v*4, 400), 0.05, 0.12); }
+      s.eatCombo = (s.eatCombo || 0) + 1;
+      if (s.isPlayer){
+        if (f.v > 5) spawnParticles(f.x, f.y, "#f2b134", 3);
+        var _ef = 400 + Math.min(s.eatCombo * 35, 600);
+        var _ev = 0.10 + Math.min(s.eatCombo * 0.015, 0.18);
+        beep(_ef, 0.06, _ev);
+      }
     }
     if (s.isPlayer) run.orbs++;
   }
@@ -3178,7 +3184,11 @@ if (s.classId === "speedster"){
     if (s.magnetT > 0) s.magnetT = Math.max(0, s.magnetT - dt);
 if (s.x2T > 0) s.x2T = Math.max(0, s.x2T - dt);
 if (s.x2XpT > 0) s.x2XpT = Math.max(0, s.x2XpT - dt);
-if (s.eatT > 0) s.eatT = Math.max(0, s.eatT - dt);
+if (s.eatT > 0){
+  s.eatT = Math.max(0, s.eatT - dt);
+} else {
+  s.eatCombo = 0;
+}
 if (s.samColorT > 0){
   s.samColorT = Math.max(0, s.samColorT - dt);
   if (s.samColorT === 0) s.samColor = null;
@@ -3318,13 +3328,16 @@ if (s.samColorT > 0){
 s.boosting = false;
 s.magnetT = 0; s.x2T = 0;
 s.samColor = null; s.samColorT = 0;
-    var spawnLimit = FOOD_MIN + 1200;
     var poisonFood = (s.classId === "nuclear" && s.poisonDeath);
-    for (var i=0;i<s.segs.length;i+=2){
-      if (food.length > spawnLimit) break;
+    var killMass = s.mass * 0.5;
+    var totalSegs = s.segs.length || 1;
+    var numChunks = Math.min(60, Math.max(8, Math.floor(totalSegs / 2)));
+    var perChunk = Math.max(1, Math.round(killMass / numChunks));
+    var step = Math.max(1, Math.floor(totalSegs / numChunks));
+    for (var i=0;i<s.segs.length;i+=step){
       food.push({
         x: s.segs[i].x + rand(-8,8), y: s.segs[i].y + rand(-8,8),
-        v: 2, type: "spore", fromKill: true, hue: s.hue, poison: poisonFood,
+        v: perChunk, type: "spore", fromKill: true, hue: s.hue, poison: poisonFood,
         rot: rand(-0.4, 0.4), sz: rand(0.9, 1.1),
         wob: Math.random()*Math.PI*2, wobSpeed: rand(0.6, 1.4)
       });
@@ -4705,19 +4718,6 @@ function openLeaderboardModal(){
   
   function drawFruit(f){
     var x = f.x, y = f.y;
-    if (f.pulling){
-      var _ftt = performance.now() / 350;
-      var _fp = (Math.sin(_ftt) + 1) / 2;
-      var _fr = 16 - _fp * 8;
-      ctx.save();
-      ctx.globalAlpha = 0.55 * (1 - _fp * 0.6);
-      ctx.strokeStyle = "#d83434";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(f.x, f.y, _fr, 0, Math.PI*2);
-      ctx.stroke();
-      ctx.restore();
-    }
     var pullProgress = f.pulling ? (1 - f.pullT / 0.22) : 0;
     var scaleT = f.pulling ? (1 - pullProgress * 0.4) : 1;
     var grow = f.pulling ? (1 + pullProgress * 0.5) : 1;
@@ -5397,9 +5397,9 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
       var _mgt = performance.now() / 1000;
       ctx.save();
       for (var wv = 0; wv < 3; wv++){
-        var _phase = ((_mgt * 0.7) + wv / 3) % 1;
+        var _phase = ((_mgt * 0.3) + wv / 3) % 1;
         var _wr = mgR * (0.3 + _phase * 0.7);
-        var _wa = (1 - _phase) * 0.18;
+        var _wa = (1 - _phase) * 0.11;
         ctx.strokeStyle = "rgba(200,200,210," + _wa + ")";
         ctx.lineWidth = 3;
         ctx.beginPath();
