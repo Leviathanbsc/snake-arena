@@ -3043,10 +3043,10 @@ run = { orbs: 0, stats: { kills: 0, massCollected: 0 } };
   }
 
   function applyFood(f, s){
-    if (f.type === "magnet" && s.isPlayer){
-      s.magnetT = 20; spawnParticles(f.x, f.y, "#d83434", 16); beep(660, 0.18, 0.5);
-    } else if (f.type === "x2" && s.isPlayer){
-      s.x2T = 10; spawnParticles(f.x, f.y, "#f2b134", 16); beep(880, 0.18, 0.5);
+    if (f.type === "magnet"){
+      s.magnetT = 20; spawnParticles(f.x, f.y, "#d83434", 16); if (s.isPlayer) beep(660, 0.18, 0.5);
+    } else if (f.type === "x2"){
+      s.x2T = 10; spawnParticles(f.x, f.y, "#f2b134", 16); if (s.isPlayer) beep(880, 0.18, 0.5);
     } else if (f.type === "trapSpore"){
       if (s !== f.owner && s.colorInvert <= 0){ s.colorInvert = 2; beep(300, 0.2, 0.4); }
     } else if (f.type === "magnet" || f.type === "x2"){ }
@@ -3055,7 +3055,7 @@ run = { orbs: 0, stats: { kills: 0, massCollected: 0 } };
       if (s.isPlayer) pushKillFeed("<span class='kill'>Отравлен! -15 массы</span>");
     }
     else {
-      var mult = (s.isPlayer && s.x2T > 0) ? 2 : 1;
+      var mult = (s.x2T > 0) ? 2 : 1;
       s.score = (s.score||0) + f.v * mult;
 s.mass += f.v * 0.25 * mult;
 if (s.maxMana) s.mana = Math.min(s.maxMana, s.mana + f.v * 0.5 * mult);
@@ -3153,7 +3153,7 @@ if (s.classId === "speedster"){
     var want = segTarget(s);
     while (s.segs.length < want){ var l = s.segs[s.segs.length-1]; s.segs.push({x:l.x,y:l.y}); }
     while (s.segs.length > want + 1 && s.segs.length > 4) s.segs.pop();
-    if (s.isPlayer && s.magnetT > 0){
+    if (s.magnetT > 0){
       var MR = 320, MR2 = MR*MR, pull = 520;
       for (var mi=0; mi<food.length; mi++){
         var mf = food[mi];
@@ -5357,7 +5357,7 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
     ctx.fillText(s.name, hx, hy - bodyR*1.3 - 8/scale);
 
     // === x2 ОПЫТ — круглая вращающаяся стрелка рядом с ником ===
-    if (s.x2XpT > 0){
+    if (s.x2XpT > 0 || s.x2T > 0){
       var _nameW = ctx.measureText(s.name).width;
       var iconX = hx + _nameW / 2 + bodyR * 2.2;
       var iconY = hy - bodyR*1.3 - 8/scale;
@@ -5375,12 +5375,12 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
       var _ax = Math.cos(Math.PI * 1.55) * iconR;
       var _ay = Math.sin(Math.PI * 1.55) * iconR;
       var _tan = Math.PI * 1.55 + Math.PI / 2;
-      var _headSize = iconR * 0.75;
+      var _headSize = iconR * 0.68;
       ctx.fillStyle = "#fce860";
       ctx.beginPath();
       ctx.moveTo(_ax + Math.cos(_tan) * _headSize, _ay + Math.sin(_tan) * _headSize);
-      ctx.lineTo(_ax + Math.cos(_tan - 2.2) * _headSize, _ay + Math.sin(_tan - 2.2) * _headSize);
-      ctx.lineTo(_ax + Math.cos(_tan + 2.2) * _headSize, _ay + Math.sin(_tan + 2.2) * _headSize);
+      ctx.lineTo(_ax + Math.cos(_tan - 2.0) * _headSize, _ay + Math.sin(_tan - 2.0) * _headSize);
+      ctx.lineTo(_ax + Math.cos(_tan + 2.0) * _headSize, _ay + Math.sin(_tan + 2.0) * _headSize);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -5399,20 +5399,13 @@ if (s.isPlayer && save.activeSkin === "РАДУЖНАЯ"){ h = (performance.now(
       for (var wv = 0; wv < 3; wv++){
         var _phase = ((_mgt * 0.7) + wv / 3) % 1;
         var _wr = mgR * (0.3 + _phase * 0.7);
-        var _wa = (1 - _phase) * 0.32;
-        ctx.strokeStyle = "rgba(216,52,52," + _wa + ")";
+        var _wa = (1 - _phase) * 0.18;
+        ctx.strokeStyle = "rgba(200,200,210," + _wa + ")";
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.arc(s.x, s.y, _wr, 0, Math.PI*2);
         ctx.stroke();
       }
-      ctx.strokeStyle = "rgba(216,52,52,0.35)";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([10, 8]);
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, mgR, 0, Math.PI*2);
-      ctx.stroke();
-      ctx.setLineDash([]);
       ctx.restore();
 
       var mgSize = bodyR * 1.35;
