@@ -304,178 +304,53 @@
 
   #lobby{background:radial-gradient(ellipse at 30% 20%, rgba(79,216,255,.18) 0%, transparent 55%),radial-gradient(ellipse at 70% 85%, rgba(255,79,168,.18) 0%, transparent 60%),linear-gradient(180deg,#0a1428 0%,#0d1c38 45%,#1a2c50 100%);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 
-    /* ===== LOBBY NEW ===== */
-    #lobbyTopLeft{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));left:10px;
-    display:flex;flex-direction:column;gap:6px;z-index:6}
-  .lvlXpBox{display:flex;align-items:center;gap:8px;
-    padding:4px 14px 4px 4px;border-radius:24px;
-    background:linear-gradient(180deg,#3a2a6a 0%,#1a0f3d 100%);
-    border:3px solid #f2b134;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.25),0 6px 0 #2a1a55,0 8px 20px rgba(0,0,0,.55)}
-  .lvlBadge{width:44px;height:44px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,#fce860 0%,#f2b134 55%,#c9761a 100%);
-    display:flex;align-items:center;justify-content:center;
-    font-size:18px;font-weight:900;color:#3a2500;
-    border:3px solid #fff;
-    box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(0,0,0,.25),0 0 14px rgba(242,177,52,.6)}
-  .xpBar{position:relative;height:16px;width:160px;border:2px solid #f2b134;border-radius:10px;
-    background:#0a1a3a;box-shadow:inset 0 2px 4px rgba(0,0,0,.7);overflow:hidden}
-  .xpBar i{display:block;height:100%;width:0%;
-    background:linear-gradient(180deg,#aee0ff 0%,#3a80e0 55%,#1a4aa8 100%);
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.5)}
-
-  .nickRow{display:flex;align-items:center;gap:6px;
-    padding:4px 8px 4px 12px;border-radius:14px;
-    background:linear-gradient(180deg,#3a2a6a 0%,#1a0f3d 100%);
-    border:3px solid #f2b134;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.2),0 4px 0 #2a1a55,0 6px 14px rgba(0,0,0,.5)}
-  .nickName{font-size:13px;font-weight:900;color:#fff;max-width:140px;
-    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-    text-shadow:0 1px 3px rgba(0,0,0,.7);margin-right:4px}
-  .hpRow{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;
-    padding:3px 12px;border-radius:12px;
-    background:linear-gradient(180deg,#5a1010,#2a0808);
-    border:2px solid #e4572e;font-size:12px;font-weight:900;color:#fff;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.2),0 3px 0 #1a0404}
-  .hpRow b{color:#ffb060;font-family:"Consolas",monospace}
-
-  .sqBtn{width:34px;height:34px;border-radius:9px;
-    background:linear-gradient(180deg,#5a8ce8 0%,#2a4fa8 55%,#1a3570 100%);
-    border:2px solid #f2b134;color:#fff;font-size:15px;
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.45),inset 0 -3px 0 rgba(0,0,0,.3),0 3px 0 #6a3a00,0 4px 10px rgba(0,0,0,.5);
-    transition:transform .08s ease, filter .15s ease}
-  .sqBtn:active{transform:scale(.94);filter:brightness(.92)}
-  .sqBtn svg{width:20px;height:20px;display:block}
-
-  #lobbyTopRight{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:10px;
-    display:flex;flex-direction:row;gap:6px;align-items:center;z-index:6}
-  .statBox{display:flex;align-items:center;gap:5px;
-    padding:6px 12px;border-radius:14px;
-    background:linear-gradient(180deg,#3a2a6a 0%,#1a0f3d 100%);
-    border:3px solid #f2b134;font-size:13px;font-weight:800;color:#fff;
-    font-family:"Consolas","Courier New",monospace;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.25),0 5px 0 #2a1a55,0 6px 14px rgba(0,0,0,.5)}
-  .statBox.gems{border-color:#7fd0ff}
-  .statBox.stars{border-color:#fce860}
-
-  #lobbyRankWrap{display:flex !important;position:absolute;top:calc(6px + env(safe-area-inset-top,0px));
-    left:50%;transform:translateX(-50%);z-index:5}
-  .rankBadge{position:relative;width:110px;height:132px;
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-    padding:14px 10px 24px;
-    background:linear-gradient(160deg,#3a2566,#1a0e33);
-    cursor:pointer;filter:drop-shadow(0 8px 20px rgba(106,74,156,.55));
-    clip-path:polygon(0 0, 100% 0, 100% 68%, 50% 100%, 0 68%)}
-  .rankBadge::before{content:"";position:absolute;inset:3px;
-    background:linear-gradient(160deg,#4b2f80,#241245);
-    clip-path:polygon(0 0, 100% 0, 100% 68%, 50% 100%, 0 68%);z-index:0}
-  .rankBadge::after{content:"";position:absolute;inset:6px;
-    background:linear-gradient(160deg,#5c3a99,#2e1a58);
-    clip-path:polygon(0 0, 100% 0, 100% 68%, 50% 100%, 0 68%);z-index:1}
-  .rankBadge .rankIcon{position:relative;z-index:2;width:60px;height:60px;
-    display:flex;align-items:center;justify-content:center}
-  .rankBadge .rankIcon svg{width:100%;height:100%;display:block}
-  .rankBadge .rankLabel{position:relative;z-index:2;font-size:10px;font-weight:900;
-    color:#f2d9ff;text-transform:uppercase;letter-spacing:2px;margin-top:2px}
-  .rankBadge .rankStars{position:relative;z-index:2;font-size:11px;color:#f2b134;
-    letter-spacing:4px;margin-top:4px}
-
-  #lobbyLeftMid{position:absolute;left:10px;top:50%;transform:translateY(-50%);
-    display:flex;flex-direction:column;gap:10px;z-index:5}
-  .sideTab{display:flex;flex-direction:column;align-items:center;gap:2px;
-    width:64px;padding:10px 4px;border-radius:14px;cursor:pointer;
-    background:linear-gradient(180deg,#5a8ce8 0%,#2a4fa8 55%,#1a3570 100%);
-    border:3px solid #f2b134;color:#fff;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.4),inset 0 -3px 0 rgba(0,0,0,.3),0 4px 0 #6a3a00,0 6px 14px rgba(0,0,0,.5);
-    transition:transform .1s ease, filter .15s ease}
-  .sideTab:active{transform:translateY(3px);filter:brightness(.92)}
-  .sideTab .tabIcon{font-size:22px;line-height:1}
-  .sideTab .tabLabel{font-size:9px;font-weight:900;letter-spacing:.5px;
-    text-shadow:0 1px 2px rgba(0,0,0,.6)}
-
-  #lobbyCenter{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
-    display:flex;flex-direction:column;align-items:center;gap:14px;z-index:4}
-  .mapBox{position:relative;width:480px;max-width:80vw;
-    background:linear-gradient(180deg,#3a2a6a,#1a0f3d);
-    border:4px solid #f2b134;border-radius:18px;padding:8px;
-    box-shadow:inset 0 3px 0 rgba(255,255,255,.25),inset 0 -4px 0 rgba(0,0,0,.35),
-      0 6px 0 #2a1a55,0 10px 24px rgba(0,0,0,.55)}
-  .mapBox canvas{width:100%;height:auto;border-radius:10px;display:block;background:#1a0f3d}
-  .mapLabel{position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    background:linear-gradient(180deg,#fce860,#f2b134);
-    color:#3a2500;font-size:11px;font-weight:900;letter-spacing:2px;
-    padding:3px 14px;border-radius:10px;border:2px solid #6a3a00}
-  .modeRow{display:flex;gap:12px}
-  .modeCard{display:flex;align-items:center;gap:8px;
-    padding:10px 18px;border-radius:14px;cursor:pointer;
-    background:linear-gradient(180deg,#5a8ce8 0%,#2a4fa8 55%,#1a3570 100%);
-    border:3px solid #f2b134;color:#fff;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.35),
-      0 5px 0 #6a3a00,0 7px 16px rgba(0,0,0,.5);
-    transition:transform .1s ease, filter .15s ease}
-  .modeCard:active{transform:translateY(4px);filter:brightness(.92)}
-  .modeCard .modeIcon{font-size:22px}
-  .modeCard .modeName{font-size:13px;font-weight:900;letter-spacing:1px}
-
+    /* ===== ASTRA 6 LOBBY REDESIGN ===== */
+  #lobby{background:radial-gradient(ellipse at 50% 42%,rgba(47,124,171,.18),transparent 48%),linear-gradient(135deg,#0a1b2d,#111d38 58%,#211c3a);backdrop-filter:none;-webkit-backdrop-filter:none}
+  #lobbyTopLeft{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:12px;display:flex;flex-direction:row;align-items:center;gap:10px;z-index:6;max-width:48vw}
+  .lvlXpBox{display:flex;align-items:center;gap:8px;padding:3px 10px 3px 3px;border-radius:24px;background:linear-gradient(180deg,#24577b,#10243e);border:2px solid #50d9ff;box-shadow:0 3px 10px #0008}
+  .lvlBadge{width:40px;height:40px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 25%,#d8f8ff,#47b8ed 58%,#15518d);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#082039;border:2px solid #d7f8ff;box-shadow:0 0 8px #4bd8ff55}
+  .xpBar{position:relative;height:13px;width:clamp(65px,12vw,160px);border:2px solid #49d9ff;border-radius:10px;background:#071522;overflow:hidden}
+  .xpBar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#79e7ff,#2779d1)}
+  .hpRow{display:none}
+  .nickRow{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:12px;background:#101e38;border:1px solid #3f8db0;box-shadow:0 3px 10px #0006;min-width:0}
+  .nickName{font-size:13px;font-weight:800;color:#72e5ff;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sqBtn{width:30px;height:30px;border-radius:8px;background:linear-gradient(180deg,#27587c,#10243b);border:1px solid #55dfff;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px #0006}
+  #newsBtn,#friendsBtn,#msgBtn{display:none}
+  #lobbyTopRight{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));right:10px;display:flex;gap:5px;align-items:center;z-index:6}
+  .statBox{display:flex;align-items:center;gap:4px;padding:6px 9px;border-radius:18px;background:#162d49;border:1px solid #50d9ff;font-size:12px;font-weight:800;color:#fff;font-family:Consolas,monospace;box-shadow:0 3px 8px #0006}
+  .statBox.coins{border-color:#f4bd42}.statBox.gems{border-color:#75d9ff}.statBox.stars{border-color:#f36ec4}
+  #lobbyRankWrap{display:flex!important;position:absolute;top:calc(4px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:5}
+  .rankBadge{position:relative;width:94px;height:112px;display:flex;flex-direction:column;align-items:center;padding:10px 8px 20px;background:linear-gradient(160deg,#34265b,#17152e);clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%);filter:drop-shadow(0 5px 10px #0006)}
+  .rankBadge::before{content:"";position:absolute;inset:3px;background:linear-gradient(160deg,#49327c,#241c48);clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%);z-index:0}
+  .rankBadge::after{content:"";position:absolute;inset:6px;background:linear-gradient(160deg,#3c2c68,#21183f);clip-path:polygon(0 0,100% 0,100% 68%,50% 100%,0 68%);z-index:1}
+  .rankBadge .rankIcon{position:relative;z-index:2;width:48px;height:48px;display:flex;align-items:center;justify-content:center}.rankBadge .rankIcon svg{width:100%;height:100%}
+  .rankBadge .rankLabel{position:relative;z-index:2;font-size:9px;color:#75e5ff;letter-spacing:2px;margin-top:2px}.rankBadge .rankStars{position:relative;z-index:2;font-size:10px;color:#f45eb5;letter-spacing:3px;margin-top:3px}
+  #lobbyLeftMid{position:absolute;left:12px;top:30%;transform:none;display:flex;flex-direction:column;gap:10px;z-index:5}
+  .sideTab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:72px;min-height:66px;padding:8px 4px;border-radius:14px;cursor:pointer;background:linear-gradient(180deg,#ffe2a0,#d99025);border:2px solid #f5c65e;color:#372609;box-shadow:0 3px 8px #0005;transition:filter .15s}
+  .sideTab:active{filter:brightness(.92)}.sideTab .tabIcon{font-size:22px;line-height:1}.sideTab .tabLabel{font-size:9px;font-weight:900;letter-spacing:.3px}
+  #lobbyCenter{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:4;width:min(44vw,520px)}
+  .snakeSelect{position:relative;width:100%;padding:18px 18px 14px;border-radius:24px;background:linear-gradient(180deg,rgba(24,48,76,.97),rgba(8,18,34,.98));border:2px solid #42d7ff;box-shadow:0 5px 0 #071322,0 10px 24px #0005;display:flex;flex-direction:column;align-items:center;gap:12px}
+  .snakeSelectHead{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;color:#fff;font-weight:800;letter-spacing:.5px}
+  .gearSlot{width:38px;height:38px;border-radius:50%;border:1px solid #5ddfff;background:linear-gradient(180deg,#27577a,#11233b);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
+  .snakeName{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+  .snakePreview{width:100%;min-height:88px;border-radius:18px;background:linear-gradient(90deg,#0b1728,#1c3047,#0b1728);border:1px solid #2d6381;display:flex;align-items:center;justify-content:center;color:#8deaff;font-size:38px}
+  .snakeSelectFoot{display:flex;align-items:center;justify-content:space-between;width:100%;gap:10px}
+  .snakeArrow{border:0;background:transparent;color:#83eaff;font-size:28px;padding:0 6px;cursor:pointer}
+  .chooseSnake{border:1px solid #5bdfff;border-radius:12px;background:linear-gradient(180deg,#78d8ff,#3786df);color:#071d32;font-weight:900;letter-spacing:1px;padding:9px 24px;cursor:pointer}
   #lobbyRightMid{position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:5}
-  .lbPanel{width:180px;padding:10px;border-radius:18px;
-    background:linear-gradient(180deg,#3a2a6a,#1a0f3d);
-    border:3px solid #f2b134;outline:2px solid #8a5a10;outline-offset:2px;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.25),inset 0 -3px 0 rgba(0,0,0,.4),
-      0 6px 0 #2a1a55,0 12px 30px rgba(0,0,0,.55)}
-  .lbPanelTitle{text-align:center;font-size:11px;font-weight:900;letter-spacing:2px;
-    color:#fce860;margin-bottom:8px;text-shadow:0 1px 2px rgba(0,0,0,.6)}
-  .lbPanelList{display:flex;flex-direction:column;gap:5px}
-  .lbPanelRow{display:flex;align-items:center;gap:8px;
-    padding:5px 8px;border-radius:10px;
-    background:rgba(11,24,38,.5);
-    border:1px solid rgba(242,177,52,.3);
-    font-size:11px;color:#fff}
-  .lbPanelRow .rk{width:16px;text-align:center;font-weight:900;color:#f2b134;font-size:10px}
-  .lbPanelRow .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
-  .lbPanelRow .sc{font-family:"Consolas",monospace;font-weight:800;color:#7ff0e0;font-size:11px}
-  .lbPanelRow.me{background:rgba(127,240,224,.15);border-color:#22c1b0}
-  .lbPanelRow.gold .rk{color:#fce860}
-  .lbPanelRow.silver .rk{color:#e8f0ff}
-  .lbPanelRow.bronze .rk{color:#ffd0a0}
+  .lbPanel{width:clamp(140px,15vw,190px);padding:9px;border-radius:16px;background:#0c1c30;border:2px solid #49d8ff;box-shadow:0 4px 12px #0005}
+  .lbPanelTitle{text-align:center;font-size:10px;font-weight:900;letter-spacing:1px;color:#65e3ff;margin-bottom:7px}
+  .lbPanelList{display:flex;flex-direction:column;gap:4px}.lbPanelRow{display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:9px;background:#10283e;border:1px solid #244e69;font-size:10px;color:#fff}.lbPanelRow .rk{width:14px;text-align:center;font-weight:900;color:#f4bd42}.lbPanelRow .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}.lbPanelRow .sc{font-family:Consolas,monospace;font-weight:800;color:#f35ab4;font-size:10px}.lbPanelRow.me{background:#15384b;border-color:#42c8e6}
   .lbPanelEmpty{text-align:center;font-size:10px;color:#8fa7b8;padding:12px 6px;font-style:italic}
-
-  #lobbyBottom{position:absolute;bottom:0;left:0;right:0;
-    display:flex;align-items:stretch;justify-content:center;gap:8px;
-    padding:10px 12px calc(14px + env(safe-area-inset-bottom,0px));
-    background:linear-gradient(180deg,transparent 0%,rgba(6,14,23,.6) 45%,rgba(6,14,23,.9) 100%);
-    z-index:5}
-  .bottomBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    cursor:pointer;position:relative;padding:8px 10px;
-    border-radius:14px;min-width:78px;min-height:82px;
-    background:linear-gradient(180deg,#5a8ce8 0%,#2a4fa8 55%,#1a3570 100%);
-    border:3px solid #f2b134;color:#fff;
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,0,0,.35),
-      0 5px 0 #6a3a00,0 7px 16px rgba(0,0,0,.5);
-    transition:transform .08s ease, filter .15s ease}
-  .bottomBtn:active{transform:translateY(4px);filter:brightness(.92)}
-  .bottomBtn .bIcon{font-size:24px;line-height:1;
-    display:flex;align-items:center;justify-content:center;width:30px;height:30px}
-  .bottomBtn .bIcon svg{width:26px;height:26px}
-  .bottomBtn .bLabel{font-size:10px;font-weight:900;letter-spacing:1px;
-    text-shadow:0 1px 2px rgba(0,0,0,.7)}
-
-  .bottomBtn.shopBtn{min-width:140px;
-    background:linear-gradient(180deg,#ffd070 0%,#f2a830 55%,#a06010 100%);
-    color:#3a2500}
-  .bottomBtn.shopBtn .bLabel,.bottomBtn.shopBtn .bIcon{color:#3a2500;text-shadow:0 1px 0 rgba(255,255,255,.5)}
-  .bottomBtn.shopBtn svg path,.bottomBtn.shopBtn svg circle{fill:#3a2500}
-  .bottomBtn.shopBtn .bLabel{font-size:14px}
-
-  .bottomBtn.playBtnBig{min-width:160px;
-    background:linear-gradient(180deg,#fce860 0%,#f2b134 50%,#c9761a 100%);
-    color:#3a2500;
-    box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(0,0,0,.25),
-      0 6px 0 #6a3a00,0 8px 20px rgba(0,0,0,.5),0 0 26px rgba(242,177,52,.5)}
-  .bottomBtn.playBtnBig .bLabel,.bottomBtn.playBtnBig .bIcon{color:#3a2500}
-  .bottomBtn.playBtnBig .bLabel{font-size:15px;letter-spacing:2px}
-  /* ===== /LOBBY NEW ===== */
+  #lobbyBottom{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,transparent,rgba(5,13,23,.78));z-index:5}
+  .bottomBtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;position:relative;padding:8px 12px;border-radius:14px;min-width:68px;min-height:62px;background:linear-gradient(180deg,#245778,#10253c);border:1px solid #4ad8ff;color:#fff;box-shadow:0 3px 8px #0005;transition:filter .1s}
+  .bottomBtn:active{filter:brightness(.92)}.bottomBtn .bIcon{font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;width:28px;height:28px}.bottomBtn .bIcon svg{width:24px;height:24px}.bottomBtn .bLabel{font-size:9px;font-weight:900;letter-spacing:.7px}
+  .bottomBtn.shopBtn{min-width:190px;min-height:74px;background:linear-gradient(180deg,#ffe1a0,#e39a29);border:2px solid #f4c65f;color:#382607}.bottomBtn.shopBtn .bLabel{font-size:17px}.bottomBtn.shopBtn .bLabel,.bottomBtn.shopBtn .bIcon{color:#382607}
+  .bottomBtn.playBtnBig{min-width:160px;min-height:72px;background:linear-gradient(120deg,#6adfff,#658cff 58%,#e45bc0);border:2px solid #b3f1ff;color:#081a30;box-shadow:0 4px 12px #0005}.bottomBtn.playBtnBig .bLabel,.bottomBtn.playBtnBig .bIcon{color:#081a30}.bottomBtn.playBtnBig .bLabel{font-size:16px;letter-spacing:1px}
+  #winStreak{display:flex;align-items:center;gap:5px;min-width:54px;justify-content:center;padding:8px 10px;border-radius:12px;background:#10243b;border:1px solid #55dfff;color:#fff;font-weight:900;font-size:17px}
+  @media(max-width:760px){#lobbyTopLeft{max-width:55vw;gap:5px}.nickRow{padding:5px 7px}.nickName{max-width:90px}#lobbyRankWrap{top:70px}.rankBadge{width:68px;height:82px;padding:6px 5px 15px}.rankBadge .rankIcon{width:34px;height:34px}#lobbyLeftMid{top:34%;left:6px}.sideTab{width:56px;min-height:54px}.sideTab .tabIcon{font-size:19px}.sideTab .tabLabel{font-size:8px}#lobbyCenter{top:52%;width:calc(100vw - 150px);max-width:420px;left:52%}.snakeSelect{padding:12px 10px}.snakePreview{min-height:60px;font-size:28px}#lobbyRightMid{right:5px}.lbPanel{width:118px;padding:6px}.lbPanelTitle{font-size:8px}.lbPanelRow{font-size:8px;gap:3px;padding:4px}.lbPanelRow .sc{font-size:8px}#lobbyBottom{padding:8px 8px calc(9px + env(safe-area-inset-bottom,0px));gap:6px}.bottomBtn{min-width:48px;min-height:52px;padding:5px 6px}.bottomBtn .bIcon{font-size:18px}.bottomBtn .bLabel{font-size:7px}.bottomBtn.shopBtn{min-width:105px;min-height:58px}.bottomBtn.shopBtn .bLabel{font-size:12px}.bottomBtn.playBtnBig{min-width:100px;min-height:58px}.bottomBtn.playBtnBig .bLabel{font-size:12px}}
+  @media(max-width:480px){#lobbyTopLeft{left:5px;top:5px}.lvlBadge{width:32px;height:32px;font-size:14px}.xpBar{width:55px;height:10px}.nickName{max-width:64px;font-size:10px}#lobbyTopRight{right:5px;top:5px;gap:3px}.statBox{padding:5px 5px;font-size:9px;border-width:1px}#iconSettings{width:26px;height:26px}#lobbyRankWrap{top:54px}#lobbyLeftMid{top:29%;gap:6px}.sideTab{width:48px;min-height:48px;padding:5px 2px}#lobbyCenter{left:52%;top:51%;width:calc(100vw - 112px)}.snakeName{font-size:11px}.gearSlot{width:29px;height:29px;font-size:16px}.snakePreview{min-height:46px;font-size:24px}.chooseSnake{padding:7px 15px;font-size:11px}#lobbyRightMid{top:70%;transform:translateY(-50%)}.lbPanel{width:104px}.lbPanelRow .rk{width:10px}#lobbyBottom{justify-content:space-between;gap:3px}.bottomBtn.shopBtn{min-width:82px}.bottomBtn.playBtnBig{min-width:82px}#winStreak{min-width:34px;padding:6px 5px;font-size:14px}}
+  /* ===== /ASTRA 6 LOBBY REDESIGN ===== */
 
   #circleWipe{position:fixed;inset:0;z-index:200;pointer-events:none;background:#060e17;
     clip-path:circle(0% at 50% 50%);will-change:clip-path}
@@ -1635,6 +1510,59 @@
   .trophyBtn span,
   .shopBtn span{ bottom:-12px !important; font-size:8px !important; }
 }
+
+  /* ASTRA 6 lobby follow-up: daily gifts at top, quests above shop, streak centered */
+  #lobbyLeftMid{top:calc(20px + env(safe-area-inset-top,0px) + 112px);gap:9px}
+  #dailyGiftBtn{order:0}
+  #iconBuffs{order:1}
+  #iconSnakeList{order:2}
+  #lobbyBottom{display:grid;grid-template-columns:minmax(120px,1fr) auto minmax(150px,1fr);align-items:end;justify-content:initial;gap:12px;padding:12px 18px calc(14px + env(safe-area-inset-bottom,0px))}
+  #iconShop{grid-column:1;justify-self:start}
+  #winStreak{grid-column:2;justify-self:center;align-self:center;min-width:54px}
+  #playBig{grid-column:3;justify-self:end}
+  #mvpQuestPanel{position:absolute;left:18px;bottom:calc(104px + env(safe-area-inset-bottom,0px));width:clamp(190px,22vw,270px);z-index:4;padding:12px;border:2px solid #f2b134;border-radius:15px;background:linear-gradient(180deg,rgba(31,43,67,.97),rgba(10,19,35,.98));box-shadow:0 4px 0 #67420d,0 10px 22px #0005;color:#f6f8ff}
+  #mvpQuestPanel .mvpHead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+  #mvpQuestPanel .mvpTitle{font-size:16px;font-weight:1000;letter-spacing:1px;color:#ffd66d}
+  #mvpQuestPanel .mvpTag{font-size:9px;font-weight:900;color:#0b1a2c;background:#f5c95f;border-radius:6px;padding:3px 5px}
+  #mvpQuestPanel .mvpQuest{display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center;padding:6px 0;border-top:1px solid #ffffff1c;font-size:10px}
+  #mvpQuestPanel .mvpQuest strong{color:#9beaff;font-size:10px}
+  #mvpQuestPanel .mvpProgress{grid-column:1/2;height:5px;background:#071421;border-radius:5px;overflow:hidden}
+  #mvpQuestPanel .mvpProgress i{display:block;height:100%;width:50%;background:linear-gradient(90deg,#53dfff,#4388ff);border-radius:5px}
+  #mvpQuestPanel .mvpChest{grid-column:2;grid-row:1/3;align-self:center;font-size:23px;filter:drop-shadow(0 2px 3px #0008)}
+  @media(max-width:760px){
+    #lobbyLeftMid{top:calc(8px + env(safe-area-inset-top,0px) + 105px);left:6px;gap:6px}
+    #mvpQuestPanel{left:7px;bottom:calc(82px + env(safe-area-inset-bottom,0px));width:clamp(142px,31vw,210px);padding:7px;border-radius:11px}
+    #mvpQuestPanel .mvpTitle{font-size:12px}#mvpQuestPanel .mvpTag{font-size:7px;padding:2px 3px}#mvpQuestPanel .mvpQuest{font-size:8px;padding:4px 0;gap:3px 5px}#mvpQuestPanel .mvpQuest strong{font-size:8px}#mvpQuestPanel .mvpChest{font-size:18px}
+    #lobbyBottom{grid-template-columns:minmax(80px,1fr) auto minmax(82px,1fr);gap:5px;padding:8px 8px calc(9px + env(safe-area-inset-bottom,0px))}
+  }
+  @media(max-width:480px){
+    #lobbyLeftMid{top:calc(5px + env(safe-area-inset-top,0px) + 92px);left:5px;gap:5px}
+    #mvpQuestPanel{bottom:calc(76px + env(safe-area-inset-bottom,0px));width:135px;padding:6px}
+    #mvpQuestPanel .mvpTitle{font-size:10px}#mvpQuestPanel .mvpQuest{font-size:7px}#mvpQuestPanel .mvpQuest strong{font-size:7px}
+    #lobbyBottom{grid-template-columns:minmax(70px,1fr) auto minmax(76px,1fr);gap:3px}
+    #winStreak{min-width:34px;padding:6px 5px;font-size:14px}
+  }
+
+  /* ASTRA 6 layout correction: compact left rail, MVP panel clear, streak beside Play */
+  #lobbyLeftMid{top:calc(76px + env(safe-area-inset-top,0px)) !important;gap:7px !important}
+  #mvpQuestPanel{width:clamp(205px,20vw,250px) !important;padding:9px !important;bottom:calc(100px + env(safe-area-inset-bottom,0px)) !important}
+  #mvpQuestPanel .mvpQuest{padding:4px 0 !important;gap:3px 7px !important}
+  #mvpQuestPanel .mvpChest{font-size:20px !important}
+  #lobbyBottom{display:flex !important;align-items:flex-end !important;justify-content:space-between !important;gap:10px !important;padding:8px 18px calc(12px + env(safe-area-inset-bottom,0px)) !important}
+  #iconShop{margin-right:auto !important}
+  #winStreak{order:2 !important;align-self:flex-end !important;margin:0 0 12px auto !important;min-width:54px !important}
+  #playBig{order:3 !important;margin-left:0 !important}
+  @media(max-width:760px){
+    #lobbyLeftMid{top:calc(70px + env(safe-area-inset-top,0px)) !important;left:6px !important;gap:5px !important}
+    #mvpQuestPanel{width:clamp(150px,28vw,195px) !important;bottom:calc(82px + env(safe-area-inset-bottom,0px)) !important;padding:7px !important}
+    #lobbyBottom{gap:5px !important;padding:7px 8px calc(9px + env(safe-area-inset-bottom,0px)) !important}
+    #winStreak{min-width:40px !important;margin:0 0 10px auto !important;padding:6px 7px !important}
+  }
+  @media(max-width:480px){
+    #lobbyLeftMid{top:calc(64px + env(safe-area-inset-top,0px)) !important;gap:4px !important}
+    #mvpQuestPanel{width:132px !important;bottom:calc(76px + env(safe-area-inset-bottom,0px)) !important;padding:5px !important}
+    #winStreak{min-width:34px !important;margin-bottom:8px !important;padding:5px !important;font-size:13px !important}
+  }
 </style>
 </head>
 
@@ -1740,22 +1668,14 @@
         <div class="lvlBadge" id="lvlNum">1</div>
         <div class="xpBar"><i id="xpFill"></i></div>
       </div>
+      <div class="nickRow"><div class="nickName" id="nickTop">Игрок</div></div>
       <div class="hpRow">⭐ ОПЫТ <b id="xpNum">0 / 100</b></div>
-      <div class="nickRow">
-        <div class="nickName" id="nickTop">Игрок</div>
-        <button class="sqBtn" id="newsBtn" title="Новости">📰</button>
-        <button class="sqBtn" id="friendsBtn" title="Друзья">👥</button>
-        <button class="sqBtn" id="msgBtn" title="Сообщения">✉</button>
-      </div>
     </div>
 
     <div id="lobbyRankWrap">
       <div class="rankBadge">
-        <div class="rankIcon">
-          <svg viewBox="0 0 32 32"><path d="M16 3l3 6 6 1-4 5 1 7-6-3-6 3 1-7-4-5 6-1z" fill="#f2b134" stroke="#8a5a10" stroke-width="1.2"/></svg>
-        </div>
-        <div class="rankLabel">РАНГ</div>
-        <div class="rankStars">★ ★ ★</div>
+        <div class="rankIcon"><svg viewBox="0 0 32 32"><path d="M16 3l3 6 6 1-4 5 1 7-6-3-6 3 1-7-4-5 6-1z" fill="#f2b134" stroke="#8a5a10" stroke-width="1.2"/></svg></div>
+        <div class="rankLabel">РАНГ</div><div class="rankStars">★ ★ ★</div>
       </div>
     </div>
 
@@ -1763,65 +1683,46 @@
       <div class="statBox coins">🪙 <b id="coinNum">0</b></div>
       <div class="statBox gems">💎 <b id="gemNum">0</b></div>
       <div class="statBox stars">⭐ <b id="starNum">0</b></div>
-      <button class="sqBtn pTrigger" id="iconSettings" data-t="Настройки"><span id="iconGearSvg"></span></button>
+      <button class="sqBtn pTrigger" id="iconSettings" data-t="Настройки" title="Настройки"><span id="iconGearSvg"></span></button>
     </div>
 
     <div id="lobbyLeftMid">
-      <button class="sideTab" data-tab="skins"><span class="tabIcon">🎨</span><span class="tabLabel">СКИНЫ</span></button>
-      <button class="sideTab" data-tab="catalog"><span class="tabIcon">📖</span><span class="tabLabel">КАТАЛОГ</span></button>
-      <button class="sideTab" data-tab="abilities"><span class="tabIcon">⚡</span><span class="tabLabel">СПОСОБ.</span></button>
-      
+      <button class="sideTab" id="dailyGiftBtn" type="button"><span class="tabIcon">🎁</span><span class="tabLabel">ПОДАРКИ</span></button>
+      <button class="sideTab" id="iconBuffs" type="button"><span class="tabIcon">⚡</span><span class="tabLabel">БАФФЫ</span></button>
+      <button class="sideTab" id="iconSnakeList" type="button"><span class="tabIcon">🐍</span><span class="tabLabel">ЗМЕИ</span></button>
     </div>
 
     <div id="lobbyCenter">
-      <div class="mapBox">
-        <canvas id="mapCanvas" width="480" height="180"></canvas>
-        <div class="mapLabel">КАРТА</div>
-      </div>
-      <div class="modeRow">
-        <button class="modeCard" data-mode="ranked">
-          <span class="modeIcon">🏆</span><span class="modeName">РАНГОВЫЙ</span>
-        </button>
-        <button class="modeCard" data-mode="training">
-          <span class="modeIcon">🎓</span><span class="modeName">ТРЕНИРОВКА</span>
-        </button>
-      </div>
-    </div>
-
-    <div id="lobbyRightMid">
-      <div class="lbPanel">
-        <div class="lbPanelTitle">ТОП ИГРОКОВ</div>
-        <div class="lbPanelList" id="lbPanelList">
-          <div class="lbPanelEmpty">Загрузка...</div>
+      <div class="snakeSelect">
+        <div class="snakeSelectHead">
+          <button class="gearSlot" id="gearSlotOne" type="button" aria-label="Снаряжение 1">＋</button>
+          <button class="gearSlot" id="gearSlotTwo" type="button" aria-label="Снаряжение 2">＋</button>
+          <div class="snakeName" id="lobbySnakeName">Выбор змеи</div>
+        </div>
+        <div class="snakePreview" id="lobbySnakePreview" aria-label="Предпросмотр выбранной змеи">🐍</div>
+        <div class="snakeSelectFoot">
+          <button class="snakeArrow" id="snakePrev" type="button" aria-label="Предыдущая змея">‹</button>
+          <button class="chooseSnake" id="chooseSnake" type="button">ВЫБРАТЬ</button>
+          <button class="snakeArrow" id="snakeNext" type="button" aria-label="Следующая змея">›</button>
         </div>
       </div>
     </div>
 
+    <div id="lobbyRightMid">
+      <div class="lbPanel"><div class="lbPanelTitle">ТОП ИГРОКОВ</div><div class="lbPanelList" id="lbPanelList"><div class="lbPanelEmpty">Загрузка...</div></div></div>
+    </div>
+
+    <section id="mvpQuestPanel" aria-label="Панель ежедневных квестов">
+      <div class="mvpHead"><div class="mvpTitle">MVP</div><div class="mvpTag">КВЕСТЫ</div></div>
+      <div class="mvpQuest"><span>Собери очки в матче</span><strong>200 / 400</strong><div class="mvpProgress"><i style="width:50%"></i></div><span class="mvpChest" aria-label="Сундук за выполнение">🎁</span></div>
+      <div class="mvpQuest"><span>Используй баффы</span><strong>2 / 3</strong><div class="mvpProgress"><i style="width:66%"></i></div><span class="mvpChest" aria-label="Сундук за выполнение">🎁</span></div>
+      <div class="mvpQuest"><span>Сыграй матчи</span><strong>1 / 4</strong><div class="mvpProgress"><i style="width:25%"></i></div><span class="mvpChest" aria-label="Сундук за выполнение">🎁</span></div>
+    </section>
+
     <div id="lobbyBottom">
-      <button class="bottomBtn shopBtn" id="iconShop">
-        <span class="bIcon" id="iconShopSvg"></span>
-        <span class="bLabel">SHOP</span>
-      </button>
-      <button class="bottomBtn" id="iconBuffs">
-        <span class="bIcon" id="iconBuffSvg"></span>
-        <span class="bLabel">БАФФЫ</span>
-      </button>
-      <button class="bottomBtn" id="iconClans">
-        <span class="bIcon">🏰</span>
-        <span class="bLabel">КЛАНЫ</span>
-      </button>
-      <button class="bottomBtn pTrigger" id="iconLeaderboard" data-t="Топ игроков">
-        <span class="bIcon" id="iconTrophySvg"></span>
-        <span class="bLabel">ЛИДЕРЫ</span>
-      </button>
-      <button class="bottomBtn" id="iconBattlePass">
-        <span class="bIcon">🎫</span>
-        <span class="bLabel">ПАСС</span>
-      </button>
-      <button class="bottomBtn" id="iconSnakeList"><span class="bIcon">🐍</span><span class="bLabel">ЗМЕИ</span></button><button class="bottomBtn playBtnBig" id="playBig">
-        <span class="bIcon">⚔</span>
-        <span class="bLabel">ИГРАТЬ</span>
-      </button>
+      <button class="bottomBtn shopBtn" id="iconShop"><span class="bIcon" id="iconShopSvg"></span><span class="bLabel">МАГАЗИН</span></button>
+      <div id="winStreak" title="Победы подряд"><span>🔥</span><span id="winStreakNum">1</span></div>
+      <button class="bottomBtn playBtnBig" id="playBig"><span class="bIcon">⚔</span><span class="bLabel">ИГРАТЬ</span></button>
     </div>
 
     <div id="panel">
@@ -7261,6 +7162,645 @@ body::after{display:none !important}
 .sqBtn:active,.shopBack:active,.shopClose:active,.trBack:active{
   transform:translateY(4px) scale(.97) !important;
   filter:brightness(.85) saturate(1.2) !important}
+</style>
+<style id="astra6-arena-skin-v2">
+
+/* ===== ASTRA 6 | Arena glass skin v2 =====
+   Visual-only layer: keeps lobby markup, handlers and game systems intact. */
+#lobby {
+  --ui-ink: #f7f4ed;
+  --ui-muted: #c1ceda;
+  --ui-glass: rgba(18, 34, 52, .76);
+  --ui-glass-deep: rgba(11, 25, 40, .9);
+  --ui-line: rgba(219, 235, 246, .28);
+  --ui-cyan: #78d9eb;
+  --ui-gold: #ffc45d;
+  --ui-gold-deep: #a96523;
+  --ui-shadow: 0 4px 12px rgba(5, 16, 28, .24);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0 !important;
+  gap: 0 !important;
+  align-items: stretch !important;
+  justify-content: stretch !important;
+  text-align: left !important;
+  color: var(--ui-ink);
+  background: #29425a !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* A warm, softly lit arena / game garage instead of a starfield. */
+#lobby::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(15, 29, 45, .02) 0%, rgba(14, 28, 43, .02) 38%, rgba(8, 19, 32, .47) 100%),
+    radial-gradient(ellipse 7% 3% at 17% 37%, rgba(255, 247, 223, .9) 0%, rgba(255, 247, 223, .34) 48%, transparent 100%),
+    radial-gradient(ellipse 6% 2.5% at 34% 33%, rgba(255, 248, 227, .83) 0%, rgba(255, 248, 227, .27) 48%, transparent 100%),
+    radial-gradient(ellipse 7% 3% at 67% 35%, rgba(255, 248, 227, .86) 0%, rgba(255, 248, 227, .28) 48%, transparent 100%),
+    radial-gradient(ellipse 6% 2.5% at 84% 39%, rgba(255, 246, 221, .84) 0%, rgba(255, 246, 221, .24) 48%, transparent 100%),
+    radial-gradient(ellipse at 51% 23%, rgba(255, 228, 183, .76) 0%, rgba(255, 209, 153, .32) 12%, transparent 34%),
+    radial-gradient(ellipse at 10% 39%, rgba(67, 157, 216, .92) 0%, rgba(75, 156, 221, .44) 23%, transparent 42%),
+    radial-gradient(ellipse at 91% 35%, rgba(242, 125, 126, .82) 0%, rgba(255, 157, 137, .38) 22%, transparent 42%),
+    radial-gradient(ellipse at 34% 75%, rgba(73, 145, 197, .44) 0%, transparent 32%),
+    radial-gradient(ellipse at 73% 73%, rgba(240, 166, 105, .34) 0%, transparent 30%),
+    repeating-linear-gradient(90deg, transparent 0 12%, rgba(229, 240, 247, .035) 12.15% 12.5%, transparent 12.85% 24%),
+    linear-gradient(145deg, #7398b9 0%, #426d92 32%, #354e70 62%, #21374f 100%);
+  background-size: cover;
+  transform: scale(1.015);
+}
+
+/* Transparent top and bottom HUD bands, with quiet hairline borders. */
+#lobby::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(9, 22, 36, .44) 0%, rgba(17, 34, 51, .19) 7%, transparent 17%, transparent 82%, rgba(17, 31, 47, .18) 88%, rgba(8, 19, 32, .63) 100%),
+    linear-gradient(180deg, transparent 0, transparent 75px, rgba(230, 241, 248, .20) 76px, transparent 77px, transparent calc(100% - 91px), rgba(230, 241, 248, .18) calc(100% - 90px), transparent calc(100% - 89px));
+  box-shadow: inset 0 0 0 1px rgba(227, 239, 246, .12);
+}
+
+/* Keep each header group readable against the brighter background. */
+#lobbyTopLeft,
+#lobbyTopRight {
+  box-sizing: border-box;
+  padding: 5px !important;
+  gap: 7px !important;
+  border: 1px solid rgba(230, 241, 248, .25) !important;
+  border-radius: 15px !important;
+  background: rgba(14, 29, 45, .58) !important;
+  box-shadow: 0 3px 12px rgba(5, 15, 25, .16), inset 0 1px 0 rgba(255, 255, 255, .11) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.08);
+  backdrop-filter: blur(12px) saturate(1.08);
+}
+#lobbyTopLeft { max-width: 49vw; }
+#lobbyTopRight { right: 8px !important; }
+
+#lobby .lvlXpBox {
+  gap: 8px !important;
+  padding: 3px 8px 3px 3px !important;
+  border: 1px solid rgba(255, 210, 126, .8) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(180deg, rgba(60, 91, 119, .95), rgba(25, 46, 67, .95)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .20), 0 2px 5px rgba(4, 14, 23, .2) !important;
+}
+#lobby .lvlBadge {
+  border: 2px solid rgba(245, 250, 252, .95) !important;
+  background: linear-gradient(145deg, #e5f5fb 0%, #91d7eb 42%, #4497be 100%) !important;
+  color: #17334a !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 2px 4px rgba(0,0,0,.22) !important;
+}
+#lobby .xpBar {
+  background: rgba(8, 19, 30, .88) !important;
+  border: 1px solid rgba(196, 226, 239, .75) !important;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.45) !important;
+}
+#lobby .xpBar i {
+  background: linear-gradient(90deg, #b6e9ef, #56b9d6) !important;
+  box-shadow: none !important;
+}
+#lobby .nickRow {
+  padding: 6px 9px !important;
+  border-radius: 11px !important;
+  border: 1px solid rgba(224, 239, 247, .27) !important;
+  background: rgba(28, 48, 67, .76) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+#lobby .nickName {
+  color: #f3f7fa !important;
+  text-shadow: none !important;
+}
+#lobby .hpRow {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+#lobby .statBox {
+  padding: 6px 9px !important;
+  border-width: 1px !important;
+  border-radius: 11px !important;
+  background: rgba(21, 39, 57, .84) !important;
+  color: #f5f7f9 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.11), 0 2px 5px rgba(3,12,20,.16) !important;
+  text-shadow: none !important;
+}
+#lobby .statBox.coins { border-color: rgba(255, 200, 104, .83) !important; color: #ffe0a0 !important; }
+#lobby .statBox.gems { border-color: rgba(126, 209, 237, .78) !important; color: #c6eff8 !important; }
+#lobby .statBox.stars { border-color: rgba(212, 172, 236, .72) !important; color: #ecd7ff !important; }
+#lobby #iconSettings {
+  border: 1px solid rgba(233, 242, 248, .42) !important;
+  border-radius: 10px !important;
+  background: rgba(21, 39, 57, .9) !important;
+  box-shadow: 0 2px 5px rgba(3,12,20,.18) !important;
+}
+
+#lobby .rankBadge {
+  filter: drop-shadow(0 4px 5px rgba(4, 12, 22, .32)) !important;
+}
+#lobby .rankBadge::before { background: linear-gradient(160deg, #5d7290, #354b68) !important; }
+#lobby .rankBadge::after { background: linear-gradient(160deg, #324967, #21364f) !important; }
+#lobby .rankBadge .rankLabel { color: #cbe6ef !important; }
+#lobby .rankBadge .rankStars { color: #f6c96f !important; }
+
+/* Left navigation: reward gold, abilities blue, snake collection teal. */
+#lobby .sideTab {
+  min-height: 61px !important;
+  border: 1px solid rgba(236, 244, 248, .55) !important;
+  border-radius: 12px !important;
+  color: #f7f4ec !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 3px 0 rgba(13, 26, 40, .55), 0 5px 10px rgba(3, 12, 21, .15) !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.22) !important;
+  filter: none !important;
+}
+#lobby #dailyGiftBtn {
+  background: linear-gradient(180deg, #eec875 0%, #ce9741 100%) !important;
+  color: #352917 !important;
+  border-color: rgba(255, 232, 175, .92) !important;
+  text-shadow: none !important;
+}
+#lobby #iconBuffs {
+  background: linear-gradient(180deg, #527f9d 0%, #2f5877 100%) !important;
+  border-color: rgba(173, 218, 236, .78) !important;
+}
+#lobby #iconSnakeList {
+  background: linear-gradient(180deg, #4c908e 0%, #2a686b 100%) !important;
+  border-color: rgba(175, 226, 218, .78) !important;
+}
+#lobby .sideTab .tabIcon { filter: none !important; }
+
+/* Snake selection: restrained glass panel with a clear preview window. */
+#lobby .snakeSelect {
+  padding: 16px 16px 13px !important;
+  gap: 11px !important;
+  border: 1px solid rgba(204, 229, 240, .52) !important;
+  border-radius: 17px !important;
+  background: linear-gradient(155deg, rgba(35, 58, 79, .94), rgba(14, 29, 45, .96)) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 4px 0 rgba(9, 20, 31, .44), 0 9px 22px rgba(5, 14, 22, .2) !important;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+#lobby .snakeSelectHead { color: #f4f6f7 !important; }
+#lobby .gearSlot {
+  border: 1px solid rgba(191, 226, 239, .66) !important;
+  background: linear-gradient(180deg, #486d89, #294963) !important;
+  color: #f8f5e9 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 4px rgba(0,0,0,.16) !important;
+}
+#lobby .snakePreview {
+  border: 1px solid rgba(170, 204, 222, .42) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(135deg, rgba(9, 23, 37, .72), rgba(35, 59, 78, .72)) !important;
+  color: #e1f0f3 !important;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.22) !important;
+}
+#lobby .snakeArrow {
+  color: #e9f0f4 !important;
+  text-shadow: none !important;
+  border-radius: 9px !important;
+}
+#lobby .chooseSnake {
+  border: 1px solid rgba(255, 231, 172, .9) !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, #f5d181, #dfa347) !important;
+  color: #382918 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.48), 0 2px 0 #96672d !important;
+  letter-spacing: .6px !important;
+}
+
+/* Leaderboard and MVP quests use the same glass-card language. */
+#lobby .lbPanel,
+#lobby #mvpQuestPanel {
+  border: 1px solid rgba(219, 235, 244, .46) !important;
+  border-radius: 14px !important;
+  background: rgba(17, 34, 51, .86) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 5px 14px rgba(5, 15, 24, .22) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.05);
+  backdrop-filter: blur(12px) saturate(1.05);
+}
+#lobby .lbPanelTitle {
+  color: #e7f2f6 !important;
+  text-shadow: none !important;
+  letter-spacing: .8px !important;
+}
+#lobby .lbPanelRow {
+  border: 1px solid rgba(201, 223, 235, .16) !important;
+  border-radius: 7px !important;
+  background: rgba(40, 62, 80, .68) !important;
+  color: #f1f4f6 !important;
+}
+#lobby .lbPanelRow .rk { color: #f5ca75 !important; }
+#lobby .lbPanelRow .sc { color: #d8e4ed !important; }
+#lobby #mvpQuestPanel {
+  border-color: rgba(237, 199, 126, .63) !important;
+  background: rgba(18, 33, 48, .87) !important;
+  color: #eef3f5 !important;
+}
+#lobby #mvpQuestPanel .mvpTitle { color: #ffd27a !important; text-shadow: none !important; }
+#lobby #mvpQuestPanel .mvpTag {
+  border-radius: 5px !important;
+  background: #e7bd67 !important;
+  color: #382a17 !important;
+}
+#lobby #mvpQuestPanel .mvpQuest { border-top-color: rgba(227, 237, 244, .13) !important; }
+#lobby #mvpQuestPanel .mvpQuest strong { color: #aee3ef !important; }
+#lobby #mvpQuestPanel .mvpProgress { background: rgba(5, 15, 24, .7) !important; }
+#lobby #mvpQuestPanel .mvpProgress i { background: linear-gradient(90deg, #8bd6e5, #53a9ca) !important; box-shadow: none !important; }
+#lobby #mvpQuestPanel .mvpChest { filter: none !important; }
+
+/* Bottom tray is a single semi-transparent frame. */
+#lobby #lobbyBottom {
+  left: 8px !important;
+  right: 8px !important;
+  bottom: calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+  padding: 9px 12px calc(9px + env(safe-area-inset-bottom, 0px)) !important;
+  border: 1px solid rgba(225, 238, 246, .28) !important;
+  border-radius: 17px !important;
+  background: rgba(11, 25, 40, .62) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10), 0 4px 14px rgba(3, 11, 19, .15) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  backdrop-filter: blur(14px) saturate(1.05);
+}
+#lobby .bottomBtn {
+  min-height: 56px !important;
+  border: 1px solid rgba(207, 227, 239, .6) !important;
+  border-radius: 11px !important;
+  background: linear-gradient(180deg, #4b6d88, #2b4965) !important;
+  color: #f5f7f7 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.20), 0 3px 0 rgba(7, 17, 28, .42) !important;
+  text-shadow: none !important;
+  transition: transform .13s ease, filter .13s ease !important;
+}
+#lobby .bottomBtn .bIcon,
+#lobby .bottomBtn .bLabel { color: inherit !important; text-shadow: none !important; }
+#lobby .bottomBtn.shopBtn {
+  min-height: 62px !important;
+  border: 1px solid #ffe3a0 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #f5d27b 0%, #e5ae4e 62%, #c98734 100%) !important;
+  color: #352713 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.58), 0 3px 0 #815521 !important;
+}
+#lobby .bottomBtn.shopBtn .bIcon,
+#lobby .bottomBtn.shopBtn .bLabel { color: #352713 !important; }
+#lobby .bottomBtn.shopBtn .bIcon,
+#lobby .bottomBtn.shopBtn .bLabel {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1 !important;
+}
+#lobby .bottomBtn.playBtnBig {
+  min-height: 62px !important;
+  border: 1px solid #ffe9b5 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #ffe29a 0%, #ffc35b 52%, #f09a3b 100%) !important;
+  color: #3a2815 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.62), 0 3px 0 #9d5b28 !important;
+}
+#lobby .bottomBtn.playBtnBig .bIcon,
+#lobby .bottomBtn.playBtnBig .bLabel { color: #3a2815 !important; }
+#lobby #winStreak {
+  border: 1px solid rgba(241, 205, 122, .77) !important;
+  border-radius: 10px !important;
+  background: rgba(20, 38, 54, .92) !important;
+  color: #fff0c9 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.13), 0 2px 5px rgba(0,0,0,.17) !important;
+  text-shadow: none !important;
+}
+
+/* No neon bloom: clear outlines, steady contrast, restrained pressed states. */
+#lobby button:focus-visible { outline: 2px solid #ffe0a0 !important; outline-offset: 2px; }
+#lobby .sideTab:active,
+#lobby .bottomBtn:active,
+#lobby .sqBtn:active,
+#lobby .gearSlot:active,
+#lobby .chooseSnake:active {
+  transform: translateY(2px) !important;
+  filter: brightness(.95) !important;
+}
+#lobby .sqBtn { box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 2px 5px rgba(0,0,0,.16) !important; }
+#lobby .svg-ico { filter: none !important; }
+
+@media (max-width: 760px) {
+  #lobbyTopLeft, #lobbyTopRight { padding: 4px !important; gap: 4px !important; border-radius: 12px !important; }
+  #lobby #lobbyBottom { left: 5px !important; right: 5px !important; bottom: calc(4px + env(safe-area-inset-bottom, 0px)) !important; padding: 7px 7px calc(7px + env(safe-area-inset-bottom, 0px)) !important; border-radius: 13px !important; }
+  #lobby .snakeSelect { border-radius: 14px !important; }
+  #lobby .sideTab { border-radius: 10px !important; }
+}
+@media (max-width: 480px) {
+  #lobbyTopLeft { max-width: 54vw !important; }
+  #lobbyTopRight { right: 4px !important; }
+  #lobby .statBox { border-radius: 8px !important; padding: 4px 5px !important; }
+  #lobby #lobbyBottom { gap: 4px !important; }
+  #lobby .bottomBtn { border-radius: 9px !important; }
+}
+/* ===== /ASTRA 6 | Arena glass skin v2 ===== */
+
+
+/* ===== ASTRA 6 | Vibrant static arena skin v3 ===== */
+/* Static, colourful arena lighting — no drifting stars or moving background. */
+#lobby {
+  background:
+    radial-gradient(ellipse at 14% 38%, rgba(25, 199, 255, .72) 0%, rgba(25, 199, 255, .12) 28%, transparent 44%),
+    radial-gradient(ellipse at 83% 28%, rgba(255, 87, 154, .48) 0%, rgba(255, 87, 154, .12) 27%, transparent 45%),
+    radial-gradient(ellipse at 56% 76%, rgba(255, 165, 45, .34) 0%, transparent 32%),
+    radial-gradient(ellipse at 42% 12%, rgba(96, 148, 255, .42) 0%, transparent 42%),
+    linear-gradient(130deg, #1265a0 0%, #174b87 30%, #263a7a 62%, #48265d 100%) !important;
+  overflow: hidden !important;
+}
+
+/* The old star field moved. Replace it with fixed bokeh-like arena lights. */
+#lobby::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  background:
+    radial-gradient(circle at 7% 22%, rgba(255, 248, 208, .95) 0 4px, rgba(255, 194, 83, .32) 9px, transparent 34px),
+    radial-gradient(circle at 18% 70%, rgba(255, 255, 255, .86) 0 5px, rgba(55, 216, 255, .26) 13px, transparent 40px),
+    radial-gradient(circle at 32% 18%, rgba(255, 221, 156, .88) 0 4px, rgba(255, 142, 81, .22) 12px, transparent 35px),
+    radial-gradient(circle at 49% 34%, rgba(255, 255, 255, .72) 0 4px, rgba(89, 196, 255, .22) 14px, transparent 42px),
+    radial-gradient(circle at 68% 18%, rgba(255, 239, 196, .87) 0 5px, rgba(255, 118, 150, .20) 14px, transparent 40px),
+    radial-gradient(circle at 87% 44%, rgba(255, 255, 255, .92) 0 4px, rgba(255, 171, 80, .26) 12px, transparent 38px),
+    radial-gradient(circle at 74% 78%, rgba(255, 219, 165, .76) 0 4px, rgba(255, 103, 162, .20) 13px, transparent 39px),
+    radial-gradient(circle at 37% 86%, rgba(255, 255, 255, .70) 0 4px, rgba(58, 222, 255, .18) 12px, transparent 36px);
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  opacity: .82 !important;
+  filter: blur(1px) saturate(1.2) !important;
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+
+/* Full-width translucent top and bottom panes, with no enclosing border/frame. */
+#lobby::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  background:
+    linear-gradient(180deg,
+      rgba(24, 30, 91, .82) 0%,
+      rgba(27, 45, 103, .65) 68%,
+      rgba(30, 52, 104, .18) 91%,
+      rgba(30, 52, 104, 0) 100%) top / 100% 94px no-repeat,
+    linear-gradient(0deg,
+      rgba(15, 24, 68, .90) 0%,
+      rgba(25, 36, 83, .72) 68%,
+      rgba(32, 48, 95, .18) 91%,
+      rgba(32, 48, 95, 0) 100%) bottom / 100% 112px no-repeat !important;
+}
+
+/* Header contents sit directly on the shared translucent pane, not in boxed frames. */
+#lobbyTopLeft,
+#lobbyTopRight {
+  top: calc(5px + env(safe-area-inset-top, 0px)) !important;
+  padding: 2px 3px !important;
+  gap: 8px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+#lobbyTopLeft { left: 10px !important; max-width: 49vw !important; }
+#lobbyTopRight { right: 10px !important; }
+#lobby .nickRow {
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: rgba(11, 34, 91, .44) !important;
+  box-shadow: none !important;
+  padding: 6px 9px !important;
+}
+#lobby .nickName {
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(2, 14, 46, .9) !important;
+}
+#lobby .lvlXpBox {
+  background: linear-gradient(180deg, #27baff 0%, #1872df 62%, #104aaf 100%) !important;
+  border: 2px solid #ffe183 !important;
+  border-radius: 16px !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.58), 0 3px 0 rgba(6,25,74,.55) !important;
+}
+#lobby .lvlBadge {
+  background: linear-gradient(145deg, #fff7b0 0%, #ffc83d 52%, #ff9228 100%) !important;
+  border: 2px solid #ffffff !important;
+  color: #26315d !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+#lobby .xpBar { border-color: rgba(255,255,255,.94) !important; }
+#lobby .xpBar i { background: linear-gradient(90deg, #ffff92, #ffb82e) !important; }
+
+/* Strong, distinct currency colours. */
+#lobby .statBox {
+  border-width: 1px !important;
+  border-radius: 13px !important;
+  padding: 7px 10px !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.42), 0 2px 5px rgba(6,15,49,.3) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.35) !important;
+}
+#lobby .statBox.coins {
+  border-color: #fff0a1 !important;
+  background: linear-gradient(180deg, #ffe56a, #ffae18 65%, #e86b13) !important;
+  color: #4d2700 !important;
+}
+#lobby .statBox.gems {
+  border-color: #b9f4ff !important;
+  background: linear-gradient(180deg, #55ecff, #168cfa 58%, #2454d8) !important;
+  color: #fff !important;
+}
+#lobby .statBox.stars {
+  border-color: #ffc5ed !important;
+  background: linear-gradient(180deg, #ff8ce1, #ed39a7 57%, #a81b84) !important;
+  color: #fff !important;
+}
+#lobby #iconSettings {
+  border: 2px solid #a9f5ff !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, #42ccff, #196bd5) !important;
+  color: #fff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 2px 4px rgba(3,13,43,.35) !important;
+}
+
+/* More vivid but readable side buttons, each category has its own colour. */
+#lobby .sideTab {
+  border-width: 2px !important;
+  border-radius: 13px !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.55), 0 3px 0 rgba(4,23,65,.42) !important;
+  text-shadow: 0 1px 1px rgba(255,255,255,.18) !important;
+  transition: transform .12s ease, filter .12s ease !important;
+}
+#lobby #dailyGiftBtn {
+  border-color: #fff2a2 !important;
+  background: linear-gradient(180deg, #fff18a 0%, #ffc62c 52%, #f18b12 100%) !important;
+  color: #583000 !important;
+}
+#lobby #iconBuffs {
+  border-color: #ffc5ed !important;
+  background: linear-gradient(180deg, #ff9ce5 0%, #e548bc 52%, #9f268d 100%) !important;
+  color: #fff !important;
+}
+#lobby #iconSnakeList {
+  border-color: #baf9ff !important;
+  background: linear-gradient(180deg, #76fbf0 0%, #19c9eb 52%, #177de0 100%) !important;
+  color: #073459 !important;
+}
+#lobby .sideTab .tabIcon { font-size: 24px !important; }
+#lobby .sideTab .tabLabel { font-size: 9px !important; font-weight: 1000 !important; }
+
+/* Snake selection: saturated blue body and crisp cyan controls. */
+#lobby .snakeSelect {
+  border: 2px solid #78eaff !important;
+  border-radius: 19px !important;
+  background: linear-gradient(180deg, rgba(23, 66, 118, .94), rgba(9, 24, 65, .96)) !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.16), 0 5px 0 rgba(6,16,52,.52), 0 8px 18px rgba(4,14,48,.25) !important;
+}
+#lobby .gearSlot {
+  border: 2px solid #b8f8ff !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #58e8ff, #1988e9 62%, #1854bd) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.5) !important;
+}
+#lobby .snakePreview {
+  border-color: rgba(145, 228, 255, .7) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(100deg, rgba(9,35,77,.9), rgba(16,71,123,.86), rgba(9,35,77,.9)) !important;
+  color: #91f6ff !important;
+}
+#lobby .snakeArrow { color: #ffe374 !important; text-shadow: 0 1px 2px rgba(0,0,0,.25) !important; }
+#lobby .chooseSnake {
+  border: 2px solid #fff1a6 !important;
+  border-radius: 11px !important;
+  background: linear-gradient(180deg, #fff27a 0%, #ffc02f 58%, #ff8b1a 100%) !important;
+  color: #4b2a06 !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 3px 0 rgba(105,52,9,.5) !important;
+}
+
+/* Clear player rows over the richer background. */
+#lobby .lbPanel {
+  border: 2px solid #75eaff !important;
+  border-radius: 13px !important;
+  background: rgba(7, 28, 67, .88) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 4px 8px rgba(3,13,43,.28) !important;
+}
+#lobby .lbPanelTitle { color: #79f1ff !important; }
+#lobby .lbPanelRow {
+  border: 1px solid rgba(150, 226, 255, .4) !important;
+  border-radius: 7px !important;
+  background: rgba(20, 64, 111, .93) !important;
+}
+#lobby .lbPanelRow .rk { color: #ffe06b !important; }
+#lobby .lbPanelRow .sc { color: #ff7bc8 !important; }
+
+/* Bottom is a transparent pane (not an outlined container). */
+#lobby #lobbyBottom {
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+#lobby .bottomBtn {
+  min-height: 62px !important;
+  border: 2px solid #a8eaff !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #4ed9ff 0%, #2686ee 54%, #244ed4 100%) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.58), 0 4px 0 rgba(8,31,91,.7) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,.18) !important;
+}
+#lobby .bottomBtn .bIcon,
+#lobby .bottomBtn .bLabel { color: inherit !important; text-shadow: none !important; }
+#lobby .bottomBtn.shopBtn {
+  min-width: clamp(200px, 15vw, 232px) !important;
+  min-height: 80px !important;
+  padding: 10px 18px !important;
+  border: 2px solid #fff2a6 !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, #fff276 0%, #ffc62d 48%, #ff8a0e 100%) !important;
+  color: #4e2a02 !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.76), 0 4px 0 #9d4c0b !important;
+}
+#lobby .bottomBtn.shopBtn .bIcon,
+#lobby .bottomBtn.shopBtn .bLabel { color: #4e2a02 !important; }
+#lobby .bottomBtn.shopBtn .bLabel { font-size: clamp(14px, 1.25vw, 18px) !important; }
+#lobby .bottomBtn.shopBtn .bIcon { font-size: 27px !important; width: 32px !important; height: 32px !important; }
+#lobby .bottomBtn.playBtnBig {
+  min-width: clamp(160px, 13vw, 190px) !important;
+  min-height: 76px !important;
+  border: 2px solid #d7fbff !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, #85f7ff 0%, #28bcff 42%, #4579ff 74%, #784ce9 100%) !important;
+  color: #061f4a !important;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.75), 0 4px 0 #1b317f !important;
+}
+#lobby .bottomBtn.playBtnBig .bIcon,
+#lobby .bottomBtn.playBtnBig .bLabel { color: #061f4a !important; }
+#lobby .bottomBtn.playBtnBig .bLabel { font-size: clamp(14px, 1.2vw, 17px) !important; }
+#lobby #winStreak {
+  margin: 0 0 8px auto !important;
+  border: 2px solid #ffe27a !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #304a9b, #142759) !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 3px 0 rgba(7,18,57,.55) !important;
+}
+
+/* More breathing room and stronger colour, with no decorative pulsing. */
+#lobby button:focus-visible { outline: 3px solid #fff08b !important; outline-offset: 2px !important; }
+#lobby .sideTab:active,
+#lobby .bottomBtn:active,
+#lobby .sqBtn:active,
+#lobby .gearSlot:active,
+#lobby .chooseSnake:active { transform: translateY(2px) !important; filter: brightness(.96) !important; }
+#lobby .svg-ico { filter: none !important; }
+
+@media (max-width: 760px) {
+  #lobbyTopLeft, #lobbyTopRight { padding: 2px !important; gap: 4px !important; }
+  #lobby #lobbyBottom { padding: 8px 8px calc(9px + env(safe-area-inset-bottom, 0px)) !important; gap: 5px !important; }
+  #lobby .bottomBtn.shopBtn { min-width: 118px !important; min-height: 66px !important; padding: 7px 9px !important; }
+  #lobby .bottomBtn.shopBtn .bLabel { font-size: 12px !important; }
+  #lobby .bottomBtn.shopBtn .bIcon { font-size: 22px !important; }
+  #lobby .bottomBtn.playBtnBig { min-width: 112px !important; min-height: 64px !important; }
+}
+@media (max-width: 480px) {
+  #lobbyTopLeft { left: 4px !important; max-width: 54vw !important; }
+  #lobbyTopRight { right: 4px !important; gap: 2px !important; }
+  #lobby .statBox { padding: 4px 5px !important; border-radius: 8px !important; font-size: 9px !important; }
+  #lobby #lobbyBottom { padding: 6px 5px calc(7px + env(safe-area-inset-bottom, 0px)) !important; gap: 3px !important; }
+  #lobby .bottomBtn.shopBtn { min-width: 92px !important; min-height: 58px !important; padding: 5px !important; }
+  #lobby .bottomBtn.shopBtn .bLabel { font-size: 10px !important; }
+  #lobby .bottomBtn.shopBtn .bIcon { font-size: 18px !important; height: 22px !important; }
+  #lobby .bottomBtn.playBtnBig { min-width: 88px !important; min-height: 58px !important; }
+  #lobby .bottomBtn.playBtnBig .bLabel { font-size: 11px !important; }
+}
+
+/* ===== /ASTRA 6 | Vibrant static arena skin v3 ===== */
+
 </style>
 </body>
 </html>
